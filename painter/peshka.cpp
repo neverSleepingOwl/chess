@@ -42,7 +42,7 @@ void Peshka::step(int x, int y){
                     if(Game::figures[j]->getX() == x && Game::figures[j]->getY() == y && Game::figures[j]->getCol() != this->colour){
                         this->x = x;
                         this->y = y;
-                        eaten = Game::figures[i];
+                        eaten = Game::figures[j];
                         Game::figures.erase(Game::figures.begin()+j);
                         eaten_f = true;
                         break;
@@ -52,7 +52,7 @@ void Peshka::step(int x, int y){
         }
     }
     for(int i = 0; i < Game::figures.size();++i){
-        if(Game::figures[i]->check() && Game::figures[i]->getCol() == this->colour){
+        if(Game::figures[i]->check() && Game::figures[i]->getCol() != this->colour){
             this->x = prevX;
             this->y = prevY;
             if(eaten_f)Game::figures.push_back(eaten);
