@@ -16,6 +16,7 @@ public:
     virtual void step(int,int);
     virtual std::vector<std::pair <int, int> > probableAttack();
     virtual bool check();
+    virtual bool can_go();
 protected:
     int x,y,colour;
     QImage image;

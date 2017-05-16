@@ -58,3 +58,36 @@ void Ferz::step(int x, int y){
     }
 }
 
+
+bool Ferz::can_go(){
+    int prevX = this->x, prevY = this->y;
+    Figure * eaten;
+    bool found = false, eaten_f=false;
+    std::vector<std::pair<int, int>> probableSt = this->probableAttack();
+    for(int i = 0; i < probableSt.size();++i){
+        for(int j = 0; j < Game::figures.size();++j){
+            if(Game::figures[j]->getX() == probableSt[i].first && Game::figures[j]->getY() == probableSt[i].second && Game::figures[j]->getCol() != this->colour){//for eating
+                eaten = Game::figures[j];
+                Game::figures.erase(Game::figures.begin()+j);
+                eaten_f = true;
+            }
+        }
+        this->x = probableSt[i].first;
+        this->y = probableSt[i].second;
+        found = true;
+        for(int k = 0; k < Game::figures.size();++k){
+            if(Game::figures[k]->check() && Game::figures[k]->getCol() == this->colour){
+                this->x = prevX;
+                this->y = prevY;
+                if(eaten_f)Game::figures.push_back(eaten);
+                found = false;
+            }
+        }
+        if(found){
+            this->x = prevX;
+            this->y = prevY;
+            return true;
+        }
+    }
+    return false;
+}

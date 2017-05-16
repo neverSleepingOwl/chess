@@ -46,12 +46,12 @@ void Widget::paintEvent(QPaintEvent * event){
         QImage white_wins("../resources/win1.png");
         painter.drawImage(0,0,white_wins.scaled(QSize(400,400)));
     }
-    else if(Game::gameOver == 1){
+    else if(Game::gameOver == 2){
         QImage black_wins("../resources/win1.jpg");
         painter.drawImage(0,0,black_wins.scaled(QSize(400,400)));
     }
     else{
-        QImage in_draw("../resources/draw.png");
+        QImage in_draw("../resources/draw.jpg");
         painter.drawImage(0,0,in_draw.scaled(QSize(400,400)));
     }
 }

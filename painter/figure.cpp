@@ -19,3 +19,4 @@ int Figure::getY(){
 std::vector<std::pair<int, int>> Figure::probableAttack(){}
 bool Figure::check(){}
 void Figure::step(int x, int y){}
+bool Figure::can_go(){}

@@ -10,6 +10,7 @@ public:
     void step(int, int);
     std::vector<std::pair<int, int>> probableAttack();
     bool check();
+    bool can_go();
 };
 
 #endif // KON_H
