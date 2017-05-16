@@ -16,42 +16,46 @@ void Peshka::step(int x, int y){
     if(this->x == x){//step of figure
         if(!this->colour){//for white figures colour = 0
             if(this->y== y+1){
+                step_available = true;
                 for(int i = 0; i < Game::figures.size();++i){
-                    if(Game::figures[i]->getX() != x || Game::figures[i]->getY() != y){
-                        this->x = x;
-                        this->y = y;
-                        step_available = true;
+                    if(Game::figures[i]->getX() == x && Game::figures[i]->getY() == y){
+                        step_available = false;
                     }
                 }
             }
             if(this->y== y+2 && !this->step_done){
+                step_available = true;
                 for(int i = 0; i < Game::figures.size();++i){
-                    if(Game::figures[i]->getX() != x || Game::figures[i]->getY() != y){
-                        this->x = x;
-                        this->y = y;
-                        step_available = true;
+                    if(Game::figures[i]->getX() == x && Game::figures[i]->getY() == y){
+                        step_available = false;
                     }
                 }
+            }
+            if(step_available){
+                this->x = x;
+                this->y = y;
             }
         }
         else{
             if(this->y == y-1){
+                step_available = true;
                 for(int i = 0; i < Game::figures.size();++i){
-                    if(Game::figures[i]->getX() != x || Game::figures[i]->getY() != y){//check for collision
-                        this->x = x;
-                        this->y = y;
-                        step_available = true;
+                    if(Game::figures[i]->getX() == x && Game::figures[i]->getY() == y){//check for collision
+                        step_available = false;
                     }
                 }
             }
             if(this->y == y-2 && !this->step_done){
+                step_available = true;
                 for(int i = 0; i < Game::figures.size();++i){
-                    if(Game::figures[i]->getX() != x || Game::figures[i]->getY() != y){//check for collision
-                        this->x = x;
-                        this->y = y;
-                        step_available = true;
+                    if(Game::figures[i]->getX() == x && Game::figures[i]->getY() == y){//check for collision
+                        step_available = false;
                     }
                 }
+            }
+            if(step_available){
+                this->x = x;
+                this->y = y;
             }
         }
     }

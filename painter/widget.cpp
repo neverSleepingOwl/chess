@@ -6,14 +6,14 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget)
 {
     Game::figures.push_back(new korol(4,7,0));//white king
-    Game::figures.push_back(new korol(4,0,1));//black kin*/
+    Game::figures.push_back(new korol(4,0,1));//black king
     Game::figures.push_back(new Ferz(3,7,0));//white ferz
     Game::figures.push_back(new Ferz(3,0,1));//black ferz
 
     Game::figures.push_back(new Ladya(0,7,0));//white ladya 1
     Game::figures.push_back(new Ladya(7,7,0));//white ladya 2
     Game::figures.push_back(new Ladya(0,0,1));//black ladya 1
-    Game::figures.push_back(new Ladya(7,0,1));//black ladya 2*/
+    Game::figures.push_back(new Ladya(7,0,1));//black ladya 2
     Game::figures.push_back(new kon(1,7,0));//white kon 1
     Game::figures.push_back(new kon(6,7,0));//white kon 2
     Game::figures.push_back(new kon(1,0,1));//black kon 1
@@ -27,6 +27,7 @@ Widget::Widget(QWidget *parent) :
         Game::figures.push_back(new Peshka(i,1,1));//black one
     }
     ui->setupUi(this);
+    setWindowIcon(QIcon("../resources/kon0.png"));
 }
 
 Widget::~Widget()
