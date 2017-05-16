@@ -9,8 +9,9 @@ class Game
 public:
     Game();
     static std::vector<Figure *> figures;
-    static bool turn,gameOver, clicked;
-    static int temporaryFig;
+    static bool turn, clicked;
+    static int temporaryFig, gameOver;
+    static void check_over();
 };
 
 #endif // GAME_H

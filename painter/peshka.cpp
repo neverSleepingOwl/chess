@@ -11,7 +11,7 @@ void Peshka::step(int x, int y){
     if(this->x == x && this->y == y)return;
     int prevX = this->x, prevY = this->y;
     Figure * eaten;
-    bool eaten_f=false;
+    bool eaten_f=false, step_available  = false;
     if(this->x == x){//step of figure
         if(!this->colour){//for white figures colour = 0
             if(this->y== y+1){
@@ -19,6 +19,7 @@ void Peshka::step(int x, int y){
                     if(Game::figures[i]->getX() != x || Game::figures[i]->getY() != y){
                         this->x = x;
                         this->y = y;
+                        step_available = true;
                     }
                 }
             }
@@ -29,6 +30,7 @@ void Peshka::step(int x, int y){
                     if(Game::figures[i]->getX() != x || Game::figures[i]->getY() != y){//check for collision
                         this->x = x;
                         this->y = y;
+                        step_available = true;
                     }
                 }
             }
@@ -45,6 +47,7 @@ void Peshka::step(int x, int y){
                         eaten = Game::figures[j];
                         Game::figures.erase(Game::figures.begin()+j);
                         eaten_f = true;
+                        step_available = true;
                         break;
                     }
                 }
@@ -52,14 +55,14 @@ void Peshka::step(int x, int y){
         }
     }
     for(int i = 0; i < Game::figures.size();++i){
-        if(Game::figures[i]->check() && Game::figures[i]->getCol() != this->colour){
+        if(Game::figures[i]->check() && Game::figures[i]->getCol() == this->colour){
             this->x = prevX;
             this->y = prevY;
             if(eaten_f)Game::figures.push_back(eaten);
             return;
         }
     }
-    Game::turn =! Game::turn;
+    if(step_available)Game::turn =! Game::turn;
 }
 
 std::vector<std::pair<int, int>> Peshka::probableAttack(){

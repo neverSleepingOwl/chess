@@ -124,13 +124,13 @@ void Slon::step(int x, int y){
         this->x = x;
         this->y = y;
         for(int i = 0; i < Game::figures.size();++i){
-            if(Game::figures[i]->check() && Game::figures[i]->getCol() != this->colour){
+            if(Game::figures[i]->check() && Game::figures[i]->getCol() == this->colour){
                 this->x = prevX;
                 this->y = prevY;
                 if(eaten_f)Game::figures.push_back(eaten);
                 return;
             }
         }
-        Game::turn =!Game::turn;
+        Game::turn =!Game::turn;Game::check_over();
     }
 }

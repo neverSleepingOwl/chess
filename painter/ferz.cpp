@@ -54,7 +54,7 @@ void Ferz::step(int x, int y){
                 return;
             }
         }
-        Game::turn =!Game::turn;
+        Game::turn =!Game::turn;Game::check_over();
     }
 }
 

@@ -28,6 +28,9 @@ protected:
     void paintEvent(QPaintEvent *);
     void mousePressEvent(QMouseEvent *);
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::Widget *ui;
 };
