@@ -3,6 +3,7 @@
 #include "figure.h"
 #include <vector>
 #include <QString>
+#include <QDebug>
 
 class Game
 {
