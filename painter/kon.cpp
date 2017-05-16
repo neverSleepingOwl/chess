@@ -90,7 +90,8 @@ void kon::step(int x, int y){
                 return;
             }
         }
-        Game::turn =!Game::turn;Game::check_over();
+        Game::check_over();
+        Game::turn =!Game::turn;
     }
 }
 
@@ -125,6 +126,7 @@ bool kon::can_go(){
         if(found){
             this->x = prevX;
             this->y = prevY;
+             if(eaten_f)Game::figures.push_back(eaten);
             return true;
         }
     }

@@ -43,11 +43,11 @@ void Widget::paintEvent(QPaintEvent * event){
             painter.drawImage(Game::figures[i]->getX()*50, Game::figures[i]->getY()*50, Game::figures[i]->getImg().scaled(QSize(50,50)));
     }
     else if(Game::gameOver == 1){
-        QImage white_wins("../resources/win1.png");
+        QImage white_wins("../resources/win1.jpeg");
         painter.drawImage(0,0,white_wins.scaled(QSize(400,400)));
     }
     else if(Game::gameOver == 2){
-        QImage black_wins("../resources/win1.jpg");
+        QImage black_wins("../resources/win2.jpeg");
         painter.drawImage(0,0,black_wins.scaled(QSize(400,400)));
     }
     else{

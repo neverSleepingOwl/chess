@@ -83,6 +83,7 @@ void Peshka::step(int x, int y){
     }
     if(step_available){
         this->step_done = true;
+        //Game::check_over();
         Game::turn =! Game::turn;
     }
 }
