@@ -87,7 +87,7 @@ void Peshka::step(int x, int y){
     }
     if(step_available){
         this->step_done = true;
-        //Game::check_over();
+        Game::check_over();
         Game::turn =! Game::turn;
     }
 }
@@ -133,14 +133,16 @@ bool Peshka::check(){
 bool Peshka::can_go(){
     int prevX = this->x, prevY = this->y, x1 = this->x,y1 = this->y + (!this->colour)?(-1):1, x2 = this->x, y2 = this->y+(!this->colour)?(-2):2;
     Figure * eaten;
-    bool eaten_f=false, step_available  = false;
+    bool eaten_f=false, step_available  = true;
     for(int i = 0; i < Game::figures.size();++i)
-        if(Game::figures[i]->getX() != x1 || Game::figures[i]->getY() != y1){
-            this->x = x1;
-            this->y = y1;
-            step_available = true;
+        if(Game::figures[i]->getX() == x1 && Game::figures[i]->getY() == y1){
+            step_available = false;
             break;
         }
+    if(step_available){
+        this->x = x1;
+        this->y = y1;
+    }
     for(int i = 0; i < Game::figures.size();++i){
           if(Game::figures[i]->check() && Game::figures[i]->getCol() == this->colour){
                 this->x = prevX;
@@ -157,11 +159,13 @@ bool Peshka::can_go(){
     if(!this->step_done){
         for(int i = 0; i < Game::figures.size();++i){
             if(Game::figures[i]->getX() != x2 || Game::figures[i]->getY() != y2){
-                this->x = x2;
-                this->y = y2;
-                step_available = true;
+                step_available = false;
                 break;
             }
+        }
+        if(step_available){
+            this->x = x2;
+            this->y = y2;
         }
         for(int i = 0; i < Game::figures.size();++i){
               if(Game::figures[i]->check() && Game::figures[i]->getCol() == this->colour){

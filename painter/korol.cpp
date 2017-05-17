@@ -6,27 +6,31 @@ korol::korol(int x, int y, int colour)
     this->x = x;
     this->y = y;
     this->colour = colour;
-     this->image.load("../resources/korol"+QString::number(colour)+".png");
+    this->image.load("../resources/korol"+QString::number(colour)+".png");
 }
 
 std::vector<std::pair<int, int>> korol::probableAttack(){
     std::pair<int, int> tmp;
     std::vector<std::pair<int, int>> output;
+    bool step_available = true;
     for(int i = this->x - 1;i <= this->x+1;++i){
-        for(int j = this->y - 1; j <= this->y+1;++j){
+        for(int j = this->y - 1; j <= this->y+1;++j,step_available = true){
             if(i>=0 && i<8 && j>=0 && j<8 && (this->x != i || this->y != j)){
-                tmp.first = i;
-                tmp.second = j;
-                output.push_back(tmp);
+                for(int k = 0; k < Game::figures.size();++k){
+                    if(this->colour == Game::figures[k]->getCol() &&
+                       i == Game::figures[k]->getX() && j == Game::figures[k]->getY()){
+                        step_available = false;
+                        break;
+                    }
+                }
+                if(step_available){
+                    tmp.first = i;
+                    tmp.second = j;
+                    output.push_back(tmp);
+                }
             }
         }
     }
-    for(int i = 0; i < output.size();++i)
-        for(int j = 0; j < Game::figures.size();++j){
-            if(output[i].first == Game::figures[j]->getX() && output[i].second == Game::figures[j]->getY()){
-                if(this->colour == Game::figures[j]->getCol())output.erase(output.begin()+i);//remove collisions
-            }
-        }
     return output;
 }
 void korol::step(int x, int y){//TODO master with chekmate
