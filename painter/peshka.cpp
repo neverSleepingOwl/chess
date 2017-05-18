@@ -29,6 +29,9 @@ void Peshka::step(int x, int y){
                     if(Game::figures[i]->getX() == x && Game::figures[i]->getY() == y){
                         step_available = false;
                     }
+                    if(Game::figures[i]->getX() == x && Game::figures[i]->getY() == y+1){
+                        step_available = false;
+                    }
                 }
             }
             if(step_available){
@@ -49,6 +52,9 @@ void Peshka::step(int x, int y){
                 step_available = true;
                 for(int i = 0; i < Game::figures.size();++i){
                     if(Game::figures[i]->getX() == x && Game::figures[i]->getY() == y){//check for collision
+                        step_available = false;
+                    }
+                    if(Game::figures[i]->getX() == x && Game::figures[i]->getY() == y-1){
                         step_available = false;
                     }
                 }
@@ -131,8 +137,10 @@ bool Peshka::check(){
 }
 
 bool Peshka::can_go(){
-    int prevX = this->x, prevY = this->y, x1 = this->x,y1 = this->y + (!this->colour)?(-1):1, x2 = this->x, y2 = this->y+(!this->colour)?(-2):2;
+    int prevX = this->x, prevY = this->y, x1 = this->x,y1 = this->y, x2 = this->x, y2 = this->y;
     Figure * eaten;
+    y1+=(this->colour == 0)?(-1):1;
+    y2 +=+(this->colour == 0)?(-2):2;
     bool eaten_f=false, step_available  = true;
     for(int i = 0; i < Game::figures.size();++i)
         if(Game::figures[i]->getX() == x1 && Game::figures[i]->getY() == y1){
@@ -158,9 +166,13 @@ bool Peshka::can_go(){
     }
     if(!this->step_done){
         for(int i = 0; i < Game::figures.size();++i){
-            if(Game::figures[i]->getX() != x2 || Game::figures[i]->getY() != y2){
+            if(Game::figures[i]->getX() == x2 && Game::figures[i]->getY() == y2){
                 step_available = false;
                 break;
+            }
+            if(Game::figures[i]->getX() == x2 && Game::figures[i]->getY() == (y2+(this->colour)?(-1):(1))){
+                    step_available = false;
+                    break;
             }
         }
         if(step_available){

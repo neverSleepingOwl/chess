@@ -11,52 +11,110 @@ kon::kon(int x, int y, int colour)
 std::vector<std::pair<int, int>> kon::probableAttack(){
     std::pair<int, int> tmp;
     std::vector<std::pair<int, int>> output;
+    bool flag = true;
     if((this->x+1)<8 && (this->y-2) >= 0){
-        tmp.first = this->x+1;
-        tmp.second = this->y-2;
-        output.push_back(tmp);
-    }
-    if((this->x+2)<8 && (this->y-1) >= 0){
-        tmp.first = this->x+2;
-        tmp.second = this->y-1;
-        output.push_back(tmp);
-    }
-    if((this->x+2)<8 && (this->y+1) < 8){
-        tmp.first = this->x+2;
-        tmp.second = this->y+1;
-        output.push_back(tmp);
-    }
-    if((this->x+1)<8 && (this->y+2) < 8){
-        tmp.first = this->x+1;
-        tmp.second = this->y+2;
-        output.push_back(tmp);
-    }
-    if((this->x-1)>=0 && (this->y+2) <8){
-        tmp.first = this->x-1;
-        tmp.second = this->y+2;
-        output.push_back(tmp);
-    }
-    if((this->x-2)>=0 && (this->y+1) < 8){
-        tmp.first = this->x-2;
-        tmp.second = this->y+1;
-        output.push_back(tmp);
-    }
-    if((this->x-2)>=0 && (this->y-1) >= 0){//
-        tmp.first = this->x-2;
-        tmp.second = this->y-1;
-        output.push_back(tmp);
-    }
-    if((this->x-1)>=0 && (this->y-2) >= 0){//
-        tmp.first =this->x-1;
-        tmp.second = this->y-2;
-        output.push_back(tmp);
-    }
-    for(int i = 0; i < output.size();++i)
         for(int j = 0; j < Game::figures.size();++j){
-            if(output[i].first == Game::figures[j]->getX() && output[i].second == Game::figures[j]->getY()){
-                if(this->colour == Game::figures[j]->getCol())output.erase(output.begin()+i);//remove collisions
+            if(this->x+1 == Game::figures[j]->getX() && this->y-2 == Game::figures[j]->getY()){
+                if(this->colour == Game::figures[j]->getCol()) flag = false;//remove collisions
             }
         }
+        if(flag){
+            tmp.first = this->x+1;
+            tmp.second = this->y-2;
+            output.push_back(tmp);
+        }
+    }
+    if((this->x+2)<8 && (this->y-1) >= 0){
+        flag = true;
+        for(int j = 0; j < Game::figures.size();++j){
+            if(this->x+2 == Game::figures[j]->getX() && this->y-1 == Game::figures[j]->getY()){
+                if(this->colour == Game::figures[j]->getCol())flag = false;//remove collisions
+            }
+        }
+        if(flag){
+            tmp.first = this->x+2;
+            tmp.second = this->y-1;
+            output.push_back(tmp);
+        }
+    }
+    if((this->x+2)<8 && (this->y+1) < 8){
+        flag = true;
+        for(int j = 0; j < Game::figures.size();++j){
+            if(this->x+2 == Game::figures[j]->getX() && this->y+1 == Game::figures[j]->getY()){
+                if(this->colour == Game::figures[j]->getCol())flag = false;//remove collisions
+            }
+        }
+        if(flag){
+            tmp.first = this->x+2;
+            tmp.second = this->y+1;
+            output.push_back(tmp);
+        }
+    }
+    if((this->x+1)<8 && (this->y+2) < 8){
+        flag = true;
+        for(int j = 0; j < Game::figures.size();++j){
+            if(this->x+1 == Game::figures[j]->getX() && this->y+2 == Game::figures[j]->getY()){
+                if(this->colour == Game::figures[j]->getCol())flag = false;//remove collisions
+            }
+        }
+        if(flag){
+            tmp.first = this->x+1;
+            tmp.second = this->y+2;
+            output.push_back(tmp);
+        }
+    }
+    if((this->x-1)>=0 && (this->y+2) <8){
+        flag = true;
+        for(int j = 0; j < Game::figures.size();++j){
+            if(this->x-1 == Game::figures[j]->getX() && this->y+2 == Game::figures[j]->getY()){
+                if(this->colour == Game::figures[j]->getCol())flag = false;//remove collisions
+            }
+        }
+        if(flag){
+            tmp.first = this->x-1;
+            tmp.second = this->y+2;
+            output.push_back(tmp);
+        }
+    }
+    if((this->x-2)>=0 && (this->y+1) < 8){
+        flag = true;
+        for(int j = 0; j < Game::figures.size();++j){
+            if(this->x-2 == Game::figures[j]->getX() && this->y+1 == Game::figures[j]->getY()){
+                if(this->colour == Game::figures[j]->getCol())flag = false;//remove collisions
+            }
+        }
+        if(flag){
+            tmp.first = this->x-2;
+            tmp.second = this->y+1;
+            output.push_back(tmp);
+        }
+    }
+    if((this->x-2)>=0 && (this->y-1) >= 0){//
+        flag = true;
+        for(int j = 0; j < Game::figures.size();++j){
+            if(this->x-2 == Game::figures[j]->getX() && this->y-1 == Game::figures[j]->getY()){
+                if(this->colour == Game::figures[j]->getCol())flag = false;//remove collisions
+            }
+        }
+        if(flag){
+            tmp.first = this->x-2;
+            tmp.second = this->y-1;
+            output.push_back(tmp);
+        }
+    }
+    if((this->x-1)>=0 && (this->y-2) >= 0){//
+        flag = true;
+        for(int j = 0; j < Game::figures.size();++j){
+            if(this->x-1 == Game::figures[j]->getX() && this->y-2 == Game::figures[j]->getY()){
+                if(this->colour == Game::figures[j]->getCol())flag = false;//remove collisions
+            }
+        }
+        if(flag){
+            tmp.first =this->x-1;
+            tmp.second = this->y-2;
+            output.push_back(tmp);
+        }
+    }
     return output;
 }
 

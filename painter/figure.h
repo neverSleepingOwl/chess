@@ -19,6 +19,7 @@ public:
     virtual bool can_go();
 protected:
     int x,y,colour;
+    bool check_for_collision();
     QImage image;
 };
 
