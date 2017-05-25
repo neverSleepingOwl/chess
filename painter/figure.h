@@ -17,9 +17,12 @@ public:
     virtual std::vector<std::pair <int, int> > probableAttack();
     virtual bool check();
     virtual bool can_go();
+    virtual bool can_go(int, int);
 protected:
     int x,y,colour;
-    bool check_for_collision();
+    bool check_for_collision(int, int);
+    bool check_for_check();
+    virtual bool fig_on_field(int, int);
     QImage image;
 };
 
